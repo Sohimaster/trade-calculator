@@ -1,0 +1,191 @@
+:root {
+    --primary-color: #2962ff;
+    --background: #f5f6fa;
+    --text-color: #2d3436;
+    --border-color: #dcdde1;
+    --error-color: #e53935;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background);
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.inputs, .results {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.info-icon {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    position: relative;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0.5rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.info-icon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+input:invalid, .invalid {
+    border-color: var(--error-color);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.result-item {
+    background: var(--background);
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.result-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.result-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Risk level colors */
+#riskAssessment[style*="green"] {
+    background-color: #d4edda !important;
+    border: 1px solid #c3e6cb;
+}
+#riskAssessment[style*="yellow"] {
+    background-color: #fff3cd !important;
+    border: 1px solid #ffeeba;
+}
+#riskAssessment[style*="orange"] {
+    background-color: #ffe5d0 !important;
+    border: 1px solid #ffd8b1;
+}
+#riskAssessment[style*="red"] {
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb;
+}
+
+.error {
+    color: var(--error-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.error.visible {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    body {
+        padding: 1rem;
+    }
+}

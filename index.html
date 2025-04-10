@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Position Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Trade Position Calculator</h1>
+        
+        <div class="calculator-grid">
+            <section class="inputs">
+                <h2>Input Parameters</h2>
+                <div class="input-group">
+                    <label for="capital">
+                        Account Balance ($)
+                        <span class="info-icon">?
+                            <span class="tooltip">Total trading capital available in your account</span>
+                        </span>
+                    </label>
+                    <input type="number" id="capital" step="0.01" min="0" required>
+                </div>
+                
+                <div class="risk-inputs">
+                    <div class="input-group">
+                        <label for="riskPercentage">
+                            Risk Percentage (%)
+                            <span class="info-icon">?
+                                <span class="tooltip">Maximum percentage of capital to risk on this trade (1-2% recommended)</span>
+                            </span>
+                        </label>
+                        <input type="number" id="riskPercentage" step="0.01" min="0" max="100">
+                    </div>
+                    <div class="input-group">
+                        <label for="riskFixed">
+                            Fixed Risk ($)
+                            <span class="info-icon">?
+                                <span class="tooltip">Alternative to percentage - exact dollar amount you're willing to risk</span>
+                            </span>
+                        </label>
+                        <input type="number" id="riskFixed" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="entryPrice">
+                        Entry Price ($)
+                        <span class="info-icon">?
+                            <span class="tooltip">Price at which you plan to enter the trade</span>
+                        </span>
+                    </label>
+                    <input type="number" id="entryPrice" step="0.00001" min="0" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="rrRatio">
+                        Reward:Risk Ratio
+                        <span class="info-icon">?
+                            <span class="tooltip">Profit target relative to risk (e.g., 2:1 means aiming for twice the risk amount)</span>
+                        </span>
+                    </label>
+                    <input type="number" id="rrRatio" step="0.1" min="0" value="2" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="leverage">
+                        Leverage
+                        <span class="info-icon">?
+                            <span class="tooltip">Multiplier for your position size (e.g., 10x = $10 position for every $1 of capital)</span>
+                        </span>
+                    </label>
+                    <input type="number" id="leverage" step="0.1" min="0">
+                </div>
+
+                <div class="input-group checkbox-group">
+                    <input type="checkbox" id="useFullNotional">
+                    <label for="useFullNotional">
+                        Use Maximum Notional
+                        <span class="info-icon">?
+                            <span class="tooltip">Calculate position size using your total available margin (capital × leverage)</span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <label for="customNotional">
+                        Custom Notional ($)
+                        <span class="info-icon">?
+                            <span class="tooltip">Manual position size value if not using maximum available</span>
+                        </span>
+                    </label>
+                    <input type="number" id="customNotional" step="0.01" min="0">
+                </div>
+
+                <button id="calculateBtn" class="btn">Calculate</button>
+            </section>
+
+            <section class="results">
+                <h2>Calculation Results</h2>
+                <div id="error-message" class="error"></div>
+                
+                <div class="result-grid">
+                    <div class="result-item">
+                        <span class="result-label">Position Size:</span>
+                        <span id="positionSize" class="result-value">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Stop-Loss Price:</span>
+                        <span id="stopPrice" class="result-value">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Take-Profit Price:</span>
+                        <span id="tpPrice" class="result-value">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Risk Amount:</span>
+                        <span id="dollarRisk" class="result-value">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Potential Profit:</span>
+                        <span id="potentialProfit" class="result-value">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Effective Leverage:</span>
+                        <span id="effectiveLeverage" class="result-value">-</span>
+                    </div>
+                    <div class="result-item" id="riskAssessment" style="grid-column: 1 / -1; padding: 1rem; border-radius: 8px; transition: background-color 0.3s ease;">
+                        <span class="result-label">Risk Assessment:</span>
+                        <span id="riskAssessmentText" class="result-value">-</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
